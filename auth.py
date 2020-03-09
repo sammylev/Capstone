@@ -12,7 +12,7 @@ import app, models
 AUTH0_DOMAIN = 'dev-sammylev.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'castingapp'
-CLIENT_ID = ''
+CLIENT_ID = 'mMq224W998uScU4vy2ub5IvhfCUvsLd1'
 
 # Set up logging
 
@@ -48,13 +48,16 @@ def get_token_auth_header():
     auth = request.headers.get('Authorization', None)
 
     if not auth:
+        logging.info('Authorization header is missing')
         raise AuthError('Authorization header is missing', 401)
 
     parts = auth.split()
 
     if len(parts) != 2:
+        logging.info('Invalid Header - 2 parts not detected')
         raise AuthError('Invalid Header - 2 parts not detected', 401)
     elif parts[0].lower() != 'bearer':
+        logging.info('Invalid Header - Must start with bearer')
         raise AuthError('Invalid Header - Must start with bearer', 401)
 
     return parts[1]
@@ -75,10 +78,12 @@ Raise an AuthError if the requested permission string is not in the payload
 
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
+        logging.info('Invalid Header - Permissions not in payload/JWT')
         raise AuthError('Invalid Header - Permissions not in payload/JWT', 400)
 
     if permission not in payload['permissions']:
-        raise AuthError('unauthorized', 401)
+        logging.info('Unauthorized')
+        raise AuthError('Unauthorized', 401)
 
 
 '''
@@ -102,6 +107,7 @@ def verify_decode_jwt(token):
     rsa_key = {}
 
     if 'kid' not in unverified_header:
+        logging.info('Invalid Header - Kid not in header')
         raise AuthError('Invalid Header - Kid not in header', 401)
 
     for key in json_web_key['keys']:
@@ -124,14 +130,17 @@ def verify_decode_jwt(token):
             return payload
 
         except jwt.ExpiredSignatureError:
+            logging.info('Token Expired')
             raise AuthError('Token Expired', 401)
 
         except jwt.JWTClaimsError:
+            logging.info('Invalid Claims')
             raise AuthError('Invalid Claims', 401)
 
         except Exception:
+            logging.info('Invalid Header - Exception Found')
             raise AuthError('Invalid Header - Exception Found', 400)
-
+    logging.info('Invalid Header - Unable to decode jwt')
     raise AuthError('Invalid Header - Unable to decode jwt', 400)
 
 

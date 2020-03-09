@@ -2,7 +2,9 @@ import os
 from sqlalchemy import Column, String, Integer, DateTime
 from flask_sqlalchemy import SQLAlchemy
 import json
-import app, auth
+import app
+import auth
+import datetime
 
 database_filename = "database.db"
 project_dir = os.path.dirname(os.path.abspath(__file__))
@@ -44,13 +46,13 @@ Movies with attributes title and release date
 
 
 class Movie(db.Model):
-	__tablename__ = "movie"
+    __tablename__ = "movie"
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # Movie Title
     title = Column(String(80), nullable=False)
     # Release date of movie
-    release_date = Column(DateTime(), nullable=False)
+    release_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
     # Actors
     actors = db.relationship("Actor", backref="movie")
 
@@ -108,7 +110,7 @@ Actors with attributes name, age and gender
 
 
 class Actor(db.Model):
-	__tablename__ = "actor"
+    __tablename__ = "actor"
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # Actor Name
@@ -118,7 +120,7 @@ class Actor(db.Model):
     # Actor gender
     gender = Column(String(80), nullable=False)
     # Movies
-    movie_id = Column(Integer(),ForeignKey("movie.id"))
+    movie_id = Column(Integer(),db.ForeignKey("movie.id"))
 
 
     '''
