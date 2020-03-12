@@ -1,6 +1,9 @@
 ##Casting Agency Specifications
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
+##Motivation
+This is the final project for the Udacity fullstack program. Completing this project allows me to apply and practice many of the core key concepts learned in this course.
+
 ##Setup
 Python 3.7
 Follow instructions to install the latest version of python for your platform in the python docs
