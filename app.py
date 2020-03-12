@@ -2,7 +2,8 @@ import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-import models,auth
+import models
+import auth
 import logging
 from logging import FileHandler, Formatter
 
@@ -30,6 +31,7 @@ error_log.setLevel(logging.INFO)
 app.logger.setLevel(logging.INFO)
 app.logger.addHandler(error_log)
 
+
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers',
@@ -38,8 +40,8 @@ def after_request(response):
                          'GET, PATCH, POST, DELETE, OPTIONS')
     return response
 
-# ROUTES
 
+# ROUTES
 '''
 Endpoint: /
 Auth: None
@@ -47,6 +49,7 @@ Arguments: None
 Returns: hello world (string)
 Expected Success Code: 200
 '''
+
 
 @app.route('/', methods=['GET'])
 def home():
@@ -56,6 +59,7 @@ def home():
         'message': 'hello world'
     })
 
+
 '''
 Endpoint: /actors
 Auth: get:actors
@@ -63,6 +67,7 @@ Arguments: None
 Returns: List of actors
 Expected Success Code: 200
 '''
+
 
 @app.route('/actors', methods=['GET'])
 @requires_auth('get:actors')
@@ -75,6 +80,7 @@ def get_actors(jwt):
         'actors': actorList
     })
 
+
 '''
 Endpoint: /movies
 Auth: get:movies
@@ -82,6 +88,7 @@ Arguments: None
 Returns: List of movies
 Expected Success Code: 200
 '''
+
 
 @app.route('/movies', methods=['GET'])
 @requires_auth('get:movies')
@@ -94,6 +101,7 @@ def get_movies(jwt):
         'movies': movieList
     })
 
+
 '''
 Endpoint: /actors
 Auth: post:actors
@@ -101,6 +109,7 @@ Arguments: None
 Returns: Newly created actor
 Expected Success Code: 200
 '''
+
 
 @app.route('/actors', methods=['POST'])
 @requires_auth('post:actors')
@@ -123,6 +132,7 @@ def create_actor(jwt):
         'actor': actor.get_actor_info()
     })
 
+
 '''
 Endpoint: /movies
 Auth: post:movies
@@ -130,6 +140,7 @@ Arguments: None
 Returns: Newly created movie
 Expected Success Code: 200
 '''
+
 
 @app.route('/movies', methods=['POST'])
 @requires_auth('post:movies')
@@ -152,6 +163,7 @@ def create_movie(jwt):
         'movie': movie.get_movie_info()
     })
 
+
 '''
 Endpoint: /actors/<actor id>
 Auth: patch:actors
@@ -160,6 +172,7 @@ Returns: Array with updated actor information
 Expected Success Code: 200
 Failure: 404. actor of specified ID was not found
 '''
+
 
 @app.route('/actors/<int:actor_id>', methods=['PATCH'])
 @requires_auth('patch:actors')
@@ -190,6 +203,7 @@ def update_actor(jwt, actor_id):
         'drinks': [actor.get_actor_info()]
     })
 
+
 '''
 Endpoint: /movies/<movie id>
 Auth: patch:movies
@@ -198,6 +212,7 @@ Returns: Array with updated movie information
 Expected Success Code: 200
 Failure: 404. movie of specified ID was not found
 '''
+
 
 @app.route('/movies/<int:movie_id>', methods=['PATCH'])
 @requires_auth('patch:movies')
@@ -222,6 +237,7 @@ def update_movie(jwt, movie_id):
         'drinks': [movie.get_movie_info()]
     })
 
+
 '''
 Endpoint: /actors/<actor id>
 Auth: delete:actors
@@ -230,6 +246,7 @@ Returns: ID of deleted actor
 Expected Success Code: 200
 Failure: 404. actor of specified ID was not found
 '''
+
 
 @app.route('/actors/<int:actor_id>', methods=['DELETE'])
 @requires_auth('delete:actors')
@@ -246,6 +263,7 @@ def delete_actor(jwt, actor_id):
         'delete': actor.id
     })
 
+
 '''
 Endpoint: /movies/<movie id>
 Auth: delete:movies
@@ -254,6 +272,7 @@ Returns: ID of deleted movie
 Expected Success Code: 200
 Failure: 404. movie of specified ID was not found
 '''
+
 
 @app.route('/movies/<int:movie_id>', methods=['DELETE'])
 @requires_auth('delete:movies')
@@ -270,10 +289,11 @@ def delete_movie(jwt, movie_id):
         'delete': movie.id
     })
 
-# Error Handling
+
 '''
 Error handler for 422
 '''
+
 
 @app.errorhandler(422)
 def unprocessable(error):
@@ -283,9 +303,11 @@ def unprocessable(error):
         "message": "unprocessable"
     }), 422
 
+
 '''
 Error handler for 404
 '''
+
 
 @app.errorhandler(404)
 def not_found(error):
@@ -295,9 +317,11 @@ def not_found(error):
         "message": "resource not found"
     }), 404
 
+
 '''
 Error handler for 401
 '''
+
 
 @app.errorhandler(401)
 def unauthorized(error):
@@ -307,9 +331,11 @@ def unauthorized(error):
         "message": "unauthorized"
     }), 401
 
+
 '''
 Error handler for 400
 '''
+
 
 @app.errorhandler(400)
 def bad_request(error):
@@ -319,9 +345,11 @@ def bad_request(error):
         "message": "bad request"
     }), 400
 
+
 '''
 AuthError handler
 '''
+
 
 @app.errorhandler(AuthError)
 def process_AuthError(error):

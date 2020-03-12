@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "c90e967c-1144-4a0a-8488-25b6e0b1915d",
+		"name": "udacity-capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Assistant Auth Tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "sammy.murray+assistant@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Courage1",
+							"type": "text"
+						},
+						{
+							"key": "audience",
+							"value": "castingapp",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "mMq224W998uScU4vy2ub5IvhfCUvsLd1",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "5W55yQrgW0_XxM_9PPwgQ3EdqbfUX-K1yfXmUrHrefI9bk1g_WbHWjYMryuMBNjG",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev-sammylev.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"dev-sammylev",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Director Auth Tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "sammy.murray+director@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Courage1",
+							"type": "text"
+						},
+						{
+							"key": "audience",
+							"value": "castingapp",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "mMq224W998uScU4vy2ub5IvhfCUvsLd1",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "5W55yQrgW0_XxM_9PPwgQ3EdqbfUX-K1yfXmUrHrefI9bk1g_WbHWjYMryuMBNjG",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev-sammylev.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"dev-sammylev",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Executive Producer Auth Tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "sammy.murray+ep@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Courage1",
+							"type": "text"
+						},
+						{
+							"key": "audience",
+							"value": "castingapp",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "mMq224W998uScU4vy2ub5IvhfCUvsLd1",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "5W55yQrgW0_XxM_9PPwgQ3EdqbfUX-K1yfXmUrHrefI9bk1g_WbHWjYMryuMBNjG",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev-sammylev.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"dev-sammylev",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -52,10 +52,10 @@ class Movie(db.Model):
     # Movie Title
     title = Column(String(80), nullable=False)
     # Release date of movie
-    release_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    release_date = Column(DateTime, nullable=False,
+                          default=datetime.datetime.utcnow)
     # Actors
     actors = db.relationship("Actor", backref="movie")
-
 
     '''
     get_movie_info()
@@ -102,6 +102,7 @@ class Movie(db.Model):
     def __repr__(self):
         return json.dumps(self.get_movie_info())
 
+
 '''
 Actor
 a persistent movie entity, extends the base SQLAlchemy Model
@@ -116,12 +117,11 @@ class Actor(db.Model):
     # Actor Name
     name = Column(String(80), nullable=False)
     # Age of actor
-    age= Column(Integer(), nullable=False)
+    age = Column(Integer(), nullable=False)
     # Actor gender
     gender = Column(String(80), nullable=False)
     # Movies
-    movie_id = Column(Integer(),db.ForeignKey("movie.id"))
-
+    movie_id = Column(Integer(), db.ForeignKey("movie.id"))
 
     '''
     get_actor_info()
@@ -131,8 +131,8 @@ class Actor(db.Model):
     def get_actor_info(self):
         return {
             'id': self.id,
-            'title': self.name,
-            'release_date': self.age,
+            'name': self.name,
+            'age': self.age,
             'gender': self.gender
         }
 

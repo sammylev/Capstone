@@ -6,7 +6,8 @@ from jose import jwt
 from urllib.request import urlopen
 import logging
 from logging import FileHandler, Formatter
-import app, models
+import app
+import models
 
 
 AUTH0_DOMAIN = 'dev-sammylev.auth0.com'
@@ -27,6 +28,7 @@ A standardized way to communicate auth failure modes
 
 
 class AuthError(Exception):
+
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
